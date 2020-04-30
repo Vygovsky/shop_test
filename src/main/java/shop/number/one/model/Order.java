@@ -7,18 +7,19 @@ import lombok.ToString;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
 public class Order {
-    private long id;
+    private UUID id;
     private User user;
     private Map<Item, Long> items = new HashMap<>();
 
-    public Order(long id, User user) {
-        this.id = id;
+    public Order(User user) {
+        this.id = UUID.randomUUID();
         this.user = user;
     }
 

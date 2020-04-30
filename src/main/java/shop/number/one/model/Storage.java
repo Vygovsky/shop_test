@@ -4,18 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private final Map<Category, Map<Item, Integer>> categoryItems = new HashMap<Category, Map<Item, Integer>>(){{
-        put(Category.INVENTORY, new HashMap<Item, Integer>(){{
+    private final Map<Category, Map<Item, Integer>> categoryItems = new HashMap<Category, Map<Item, Integer>>() {{
+        put(Category.INVENTORY, new HashMap<Item, Integer>() {{
             put(new Item(1L, "Ball", 25), 0);
             put(new Item(2L, "MiniBall", 45), 10);
         }});
-        put(Category.CLOTHES, new HashMap<Item, Integer>(){{
+        put(Category.CLOTHES, new HashMap<Item, Integer>() {{
             put(new Item(3L, "T-shirt", 105), 10);
         }});
-        put(Category.CAP, new HashMap<Item, Integer>(){{
+        put(Category.CAP, new HashMap<Item, Integer>() {{
             put(new Item(4L, "Cup", 98), 10);
         }});
-        put(Category.FOOTWEAR, new HashMap<Item, Integer>(){{
+        put(Category.FOOTWEAR, new HashMap<Item, Integer>() {{
             put(new Item(5L, "Cross", 2150), 10);
         }});
     }};
@@ -30,7 +30,6 @@ public class Storage {
                 .filter(item -> item.getId() == id)
                 .findFirst()
                 .get();
-
     }
 
     public void addItemToCategory(Category category, Item item) {
