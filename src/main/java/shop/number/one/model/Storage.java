@@ -32,9 +32,19 @@ public class Storage {
                 .get();
     }
 
-    public void addItemToCategory(Category category, Item item) {
+    public void addItemToCategory(Category category, Item item, int amount) {
         Map<Item, Integer> items = categoryItems.getOrDefault(category, new HashMap<>());
-        items.put(item, items.getOrDefault(item, 0) + 1);
+        items.put(item, items.getOrDefault(item, 0) + amount);
+        categoryItems.put(category, items);
+    }
+
+
+    public void removeItemToCategory(Category category, Item item, int amount) {
+        Map<Item, Integer> items = categoryItems.getOrDefault(category, new HashMap<>());
+        items.put(item, items.getOrDefault(item, 0) - amount);
         categoryItems.put(category, items);
     }
 }
+
+
+
