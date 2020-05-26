@@ -1,6 +1,7 @@
 package shop.number.one;
 
 import shop.number.one.model.Category;
+import shop.number.one.model.Item;
 import shop.number.one.model.Order;
 import shop.number.one.model.Storage;
 import shop.number.one.model.User;
@@ -15,13 +16,15 @@ import java.util.stream.Stream;
 import static shop.number.one.model.InfoStoryProperties.CHOOSE_CATEGORY_ID_USER_MESSAGE;
 import static shop.number.one.model.InfoStoryProperties.CHOOSE_CATEGORY_USER_MESSAGE;
 import static shop.number.one.model.InfoStoryProperties.CHOOSE_ITEM_ID_USER_MESSAGE;
-import static shop.number.one.model.InfoStoryProperties.CHOOSE_ITEM_USER_MESSAGE;
+import static shop.number.one.model.InfoStoryProperties.CHOOSE_ITEM_VALUE_MESSAGE;
 import static shop.number.one.model.InfoStoryProperties.GREETING_MESSAGE;
 import static shop.number.one.model.InfoStoryProperties.GREETING_USER_BIRTHDAY;
 import static shop.number.one.model.InfoStoryProperties.GREETING_USER_EMAIL;
 import static shop.number.one.model.InfoStoryProperties.GREETING_USER_INFO;
 import static shop.number.one.model.InfoStoryProperties.GREETING_USER_NICKNAME;
 import static shop.number.one.model.InfoStoryProperties.GREETING_USER_REGISTRATION;
+import static shop.number.one.model.InfoStoryProperties.NOT_GOODS_MESSAGE;
+import static shop.number.one.model.InfoStoryProperties.NOT_VALID_CATEGORY_MESSAGE;
 
 public class Demo {
     private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -37,21 +40,46 @@ public class Demo {
                 formatter.parse(readInfoUser(GREETING_USER_BIRTHDAY))
         );
         print(String.format(GREETING_USER_REGISTRATION, user.getNickname()));
-        printDebugInfoUser(user);
+        Order order = new Order(user);
 
         print(CHOOSE_CATEGORY_USER_MESSAGE);
         printCategories();
-        int categoryId = read(CHOOSE_CATEGORY_ID_USER_MESSAGE);
-        Category selectedCategory = categoryById(categoryId);
-        printItems(selectedCategory);
-        Order order = new Order(user);
+
         while (true) {
-            print(CHOOSE_ITEM_USER_MESSAGE);
-            int itemId = read(CHOOSE_ITEM_ID_USER_MESSAGE);
-            if (itemId == 0) break;
-            order.addItem(STORAGE.getItemByIdFromCategory(selectedCategory, itemId));
+            int categoryId = read(CHOOSE_CATEGORY_ID_USER_MESSAGE);
+            if (shouldOrderBeSubmitted(categoryId)) break;
+
+            Category selectedCategory = categoryById(categoryId);
+            if (selectedCategory == null) {
+                print(String.format(NOT_VALID_CATEGORY_MESSAGE, categoryId));
+                continue;
+            }
+
+            while (true) {
+                printItems(selectedCategory);
+                int itemId = read(CHOOSE_ITEM_ID_USER_MESSAGE);
+                if (shouldOrderBeSubmitted(itemId)) break;
+
+                Item itemByIdFromCategory = STORAGE.getItemByIdFromCategory(selectedCategory, itemId);
+                int itemCountInDb = STORAGE.getItemValue(selectedCategory, itemByIdFromCategory);
+                int itemCountByBucket = read(buildUserMessage(CHOOSE_ITEM_VALUE_MESSAGE, itemCountInDb));
+
+                if (itemCountByBucket <= itemCountInDb && itemCountByBucket > 0) {
+                    STORAGE.removeItemFromCategory(selectedCategory, STORAGE.getItemByIdFromCategory(selectedCategory, itemId), itemCountByBucket);
+                    order.addItem(itemByIdFromCategory, itemCountByBucket);
+                    continue;
+                }
+                print(buildUserMessage(NOT_GOODS_MESSAGE, itemCountInDb));
+            }
+            print(CHOOSE_CATEGORY_USER_MESSAGE);
+            printCategories();
+
         }
         print(order.toString());
+    }
+
+    private static boolean shouldOrderBeSubmitted(int itemId) {
+        return itemId == 0;
     }
 
     private static void printItems(Category category) {
@@ -66,6 +94,10 @@ public class Demo {
 
     private static void printCategories() {
         Stream.of(Category.values()).forEach(Demo::printCategory);
+    }
+
+    private static String buildUserMessage(String template, Object... itemValue) {
+        return String.format(template, itemValue);
     }
 
     private static void printCategory(Category category) {

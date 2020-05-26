@@ -6,7 +6,7 @@ import java.util.Map;
 public class Storage {
     private final Map<Category, Map<Item, Integer>> categoryItems = new HashMap<Category, Map<Item, Integer>>() {{
         put(Category.INVENTORY, new HashMap<Item, Integer>() {{
-            put(new Item(1L, "Ball", 25), 0);
+            put(new Item(1L, "Ball", 25), 5);
             put(new Item(2L, "MiniBall", 45), 10);
         }});
         put(Category.CLOTHES, new HashMap<Item, Integer>() {{
@@ -38,13 +38,14 @@ public class Storage {
         categoryItems.put(category, items);
     }
 
-
-    public void removeItemToCategory(Category category, Item item, int amount) {
+    public void removeItemFromCategory(Category category, Item item, int amount) {
         Map<Item, Integer> items = categoryItems.getOrDefault(category, new HashMap<>());
         items.put(item, items.getOrDefault(item, 0) - amount);
         categoryItems.put(category, items);
     }
+
+    public Integer getItemValue(Category category, Item item) {
+        Map<Item, Integer> items = categoryItems.getOrDefault(category, new HashMap<>());
+        return items.get(item);
+    }
 }
-
-
-
