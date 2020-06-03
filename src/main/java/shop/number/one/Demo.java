@@ -5,6 +5,7 @@ import shop.number.one.model.Item;
 import shop.number.one.model.Order;
 import shop.number.one.model.Storage;
 import shop.number.one.model.User;
+import shop.number.one.services.UserServiceImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,8 +30,11 @@ import static shop.number.one.model.InfoStoryProperties.NOT_VALID_CATEGORY_MESSA
 public class Demo {
     private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
     private static final Storage STORAGE = new Storage();
+    private static final UserServiceImpl USER_SERVICE = new UserServiceImpl();
+
 
     public static void main(String[] args) throws IOException, ParseException {
+
         print(GREETING_MESSAGE);
         print(GREETING_USER_INFO);
 
@@ -39,7 +43,8 @@ public class Demo {
                 readInfoUser(GREETING_USER_EMAIL),
                 formatter.parse(readInfoUser(GREETING_USER_BIRTHDAY))
         );
-        print(String.format(GREETING_USER_REGISTRATION, user.getNickname()));
+        print(String.format(GREETING_USER_REGISTRATION, USER_SERVICE.save(user).getNickname()));
+
         Order order = new Order(user);
 
         print(CHOOSE_CATEGORY_USER_MESSAGE);
