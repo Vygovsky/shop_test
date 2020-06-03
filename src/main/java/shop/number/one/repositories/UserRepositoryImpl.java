@@ -3,6 +3,7 @@ package shop.number.one.repositories;
 import shop.number.one.model.User;
 import shop.number.one.storage.UserStorage;
 
+import java.util.Collection;
 import java.util.UUID;
 
 public class UserRepositoryImpl implements UserRepository {
@@ -10,7 +11,12 @@ public class UserRepositoryImpl implements UserRepository {
     private final UserStorage userStorage;
 
     public UserRepositoryImpl() {
-        this.userStorage = new UserStorage();
+        this.userStorage = UserStorage.getINSTANCE();
+    }
+
+    @Override
+    public Collection<User> findAll() {
+        return userStorage.findAll();
     }
 
     @Override

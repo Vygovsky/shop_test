@@ -4,14 +4,20 @@ import shop.number.one.model.User;
 import shop.number.one.repositories.UserRepository;
 import shop.number.one.repositories.UserRepositoryImpl;
 
+import java.util.Collection;
 import java.util.UUID;
 
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
     public UserServiceImpl() {
         this.userRepository = new UserRepositoryImpl();
+    }
+
+    @Override
+    public Collection<User> findAll() {
+        return userRepository.findAll();
     }
 
     @Override

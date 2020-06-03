@@ -2,12 +2,18 @@ package shop.number.one.storage;
 
 import shop.number.one.repositories.CrudRepository;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class BaseStorage<T, ID> implements CrudRepository<T, ID> {
 
     private Map<ID, T> storage = new HashMap<>();
+
+    @Override
+    public Collection<T> findAll() {
+        return storage.values();
+    }
 
     @Override
     public T findById(ID id) {
