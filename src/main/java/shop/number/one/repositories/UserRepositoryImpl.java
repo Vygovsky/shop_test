@@ -8,29 +8,23 @@ import java.util.UUID;
 
 public class UserRepositoryImpl implements UserRepository {
 
-    private final UserStorage userStorage;
-
-    public UserRepositoryImpl() {
-        this.userStorage = UserStorage.getINSTANCE();
-    }
-
     @Override
     public Collection<User> findAll() {
-        return userStorage.findAll();
+        return UserStorage.INSTANCE.findAll();
     }
 
     @Override
     public User findById(UUID id) {
-        return userStorage.findById(id);
+        return UserStorage.INSTANCE.findById(id);
     }
 
     @Override
     public User save(User user) {
-        return userStorage.save(user);
+        return UserStorage.INSTANCE.save(UUID.randomUUID(), user);
     }
 
     @Override
     public void delete(UUID id) {
-        userStorage.delete(id);
+        UserStorage.INSTANCE.delete(id);
     }
 }
