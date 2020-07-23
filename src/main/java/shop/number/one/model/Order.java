@@ -27,7 +27,7 @@ public class Order {
         addItem(item, 1);
     }
 
-    public void addItem(Item item, int amount) {
+    public void addItem(Item item, long amount) {
         items.put(item, items.getOrDefault(item, 0L) + amount);
     }
 }

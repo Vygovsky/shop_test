@@ -1,15 +1,21 @@
 package shop.number.one.model;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @AllArgsConstructor
-public enum Category {
-    CLOTHES(1),
-    INVENTORY(2),
-    FOOTWEAR(3),
-    CAP(4);
+@Getter
+@Setter
+@EqualsAndHashCode(of = {"name"})
+@ToString
+@NoArgsConstructor
+public class Category {
+    private Long id;
+    private String name;
 
-    @Getter
-    private int id;
+
 }
