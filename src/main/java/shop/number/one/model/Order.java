@@ -1,18 +1,16 @@
 package shop.number.one.model;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
+import javax.persistence.Entity;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
+@Entity
 public class Order {
     private UUID id;
     private User user;
@@ -29,5 +27,38 @@ public class Order {
 
     public void addItem(Item item, long amount) {
         items.put(item, items.getOrDefault(item, 0L) + amount);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Order)) return false;
+        final Order other = (Order) o;
+        if (!other.canEqual(this)) return false;
+        final Object this$id = this.getId();
+        final Object other$id = other.getId();
+        return this$id == null ? other$id == null : this$id.equals(other$id);
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof Order;
+    }
+
+    @Override
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $id = this.getId();
+        result = result * PRIME + ($id == null ? 43 : $id.hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + this.getId() +
+                ", user=" + this.getUser() +
+                ", items=" + this.getItems() +
+                '}';
     }
 }
