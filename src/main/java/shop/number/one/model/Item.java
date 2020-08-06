@@ -1,22 +1,34 @@
 package shop.number.one.model;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+@DynamicInsert
+@DynamicUpdate
+@Table
 public class Item {
     private Long id;
     private String name;
     private int price;
+    @Column(name = "AVAILABLE_COUNT")
     private long availableCount;
+    @OneToOne
+    @JoinColumn(name = "CATEGORY_ID", unique = true, nullable = false)
     private Category category;
 
-    public Item( String name, int price, long availableCount, Category category) {
+    public Item(String name, int price, long availableCount, Category category) {
         this.name = name;
         this.price = price;
         this.availableCount = availableCount;

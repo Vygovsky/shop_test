@@ -1,11 +1,13 @@
 package shop.number.one.repositories;
 
+import org.springframework.stereotype.Repository;
 import shop.number.one.model.User;
 import shop.number.one.storage.UserStorage;
 
 import java.util.Collection;
 import java.util.UUID;
 
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
     @Override

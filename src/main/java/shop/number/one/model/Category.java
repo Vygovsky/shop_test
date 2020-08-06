@@ -4,14 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+@DynamicInsert
+@DynamicUpdate
+@Table
 public class Category {
     private Long id;
     private String name;

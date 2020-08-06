@@ -2,18 +2,31 @@ package shop.number.one.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 @Getter
 @Setter
+@DynamicInsert
+@DynamicUpdate
 @Entity
+@Table (name = "ORDERS")
 public class Order {
     private UUID id;
+    @OneToOne
+    @JoinColumn(name = "CATEGORY_ID", unique = true, nullable = false)
     private User user;
+    @ManyToOne
     private Map<Item, Long> items = new HashMap<>();
 
     public Order(User user) {

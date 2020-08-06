@@ -1,5 +1,6 @@
 package shop.number.one.repositories;
 
+import org.springframework.stereotype.Repository;
 import shop.number.one.model.Category;
 import shop.number.one.model.Item;
 import shop.number.one.storage.ItemStorage;
@@ -7,6 +8,7 @@ import shop.number.one.storage.ItemStorage;
 import java.util.Collection;
 import java.util.List;
 
+@Repository
 public class ItemRepositoryImpl implements ItemRepository {
 
     private ItemStorage dataBaseItems;

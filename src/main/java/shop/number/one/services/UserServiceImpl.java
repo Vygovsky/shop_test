@@ -1,5 +1,6 @@
 package shop.number.one.services;
 
+import org.springframework.stereotype.Service;
 import shop.number.one.model.User;
 import shop.number.one.repositories.UserRepository;
 import shop.number.one.repositories.UserRepositoryImpl;
@@ -7,6 +8,7 @@ import shop.number.one.repositories.UserRepositoryImpl;
 import java.util.Collection;
 import java.util.UUID;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;

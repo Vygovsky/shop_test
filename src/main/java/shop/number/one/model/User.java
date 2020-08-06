@@ -1,8 +1,11 @@
 package shop.number.one.model;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.UUID;
 
@@ -10,7 +13,10 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
+@DynamicInsert
+@DynamicUpdate
 @Entity
+@Table
 public class User {
     private UUID id;
     private String nickname;
