@@ -4,7 +4,6 @@ package shop.number.one.services;
 import org.springframework.stereotype.Service;
 import shop.number.one.model.Category;
 import shop.number.one.model.Item;
-import shop.number.one.repositories.ItemRepository;
 import shop.number.one.repositories.ItemRepositoryImpl;
 
 import java.util.Collection;
@@ -12,10 +11,10 @@ import java.util.List;
 @Service
 public class ItemServiceImpl implements ItemService {
 
-    private ItemRepository itemRepository;
+    private final ItemRepositoryImpl itemRepository;
 
-    public ItemServiceImpl() {
-        this.itemRepository = new ItemRepositoryImpl();
+    public ItemServiceImpl(ItemRepositoryImpl itemRepository) {
+        this.itemRepository = itemRepository;
     }
 
     @Override

@@ -1,29 +1,29 @@
 package shop.number.one.repositories;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import shop.number.one.model.Category;
-import shop.number.one.storage.CategoryStorage;
 
 import java.util.Collection;
 
 @Repository
 public class CategoryRepositoryImpl implements CategoryRepository {
 
-    private CategoryStorage dataBase;
+    private final CategoryRepository categoryRepository;
 
-
-    public CategoryRepositoryImpl() {
-        this.dataBase = CategoryStorage.INSTANCE;
+    @Autowired
+    public CategoryRepositoryImpl(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
     public Collection<Category> findAll() {
-        return dataBase.findAll();
+        return categoryRepository.findAll();
     }
 
     @Override
     public Category findById(Long id) {
-        return dataBase.findById(id);
+        return categoryRepository.findById(id);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public String getCategoryName(long id) {
-        return dataBase.getCategoryName(id);
+        return categoryRepository.getCategoryName(id);
     }
 }

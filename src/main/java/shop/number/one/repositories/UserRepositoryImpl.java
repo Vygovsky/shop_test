@@ -1,8 +1,8 @@
 package shop.number.one.repositories;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import shop.number.one.model.User;
-import shop.number.one.storage.UserStorage;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -10,23 +10,30 @@ import java.util.UUID;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserRepositoryImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public Collection<User> findAll() {
-        return UserStorage.INSTANCE.findAll();
+        return userRepository.findAll();
     }
 
     @Override
     public User findById(UUID id) {
-        return UserStorage.INSTANCE.findById(id);
+        return userRepository.findById(id);
     }
 
     @Override
     public User save(User user) {
-        return UserStorage.INSTANCE.save(UUID.randomUUID(), user);
+        return userRepository.save(user);
     }
 
     @Override
     public void delete(UUID id) {
-        UserStorage.INSTANCE.delete(id);
+        userRepository.delete(id);
     }
 }

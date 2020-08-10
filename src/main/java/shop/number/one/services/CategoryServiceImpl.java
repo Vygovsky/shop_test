@@ -2,27 +2,27 @@ package shop.number.one.services;
 
 import org.springframework.stereotype.Service;
 import shop.number.one.model.Category;
-import shop.number.one.repositories.CategoryRepository;
 import shop.number.one.repositories.CategoryRepositoryImpl;
 
 import java.util.Collection;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryRepository dataBase;
+    private final CategoryRepositoryImpl categoryRepository;
 
-    public CategoryServiceImpl() {
-        this.dataBase = new CategoryRepositoryImpl();
+    public CategoryServiceImpl(CategoryRepositoryImpl categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
     public Collection<Category> findAll() {
-        return dataBase.findAll();
+        return categoryRepository.findAll();
     }
 
     @Override
     public Category findById(Long id) {
-        return dataBase.findById(id);
+        return categoryRepository.findById(id);
     }
 
     @Override
