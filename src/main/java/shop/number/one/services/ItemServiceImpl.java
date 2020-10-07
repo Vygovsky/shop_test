@@ -1,6 +1,7 @@
 package shop.number.one.services;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop.number.one.model.Category;
 import shop.number.one.model.Item;
@@ -8,11 +9,13 @@ import shop.number.one.repositories.ItemRepositoryImpl;
 
 import java.util.Collection;
 import java.util.List;
+
 @Service
 public class ItemServiceImpl implements ItemService {
 
     private final ItemRepositoryImpl itemRepository;
 
+    @Autowired
     public ItemServiceImpl(ItemRepositoryImpl itemRepository) {
         this.itemRepository = itemRepository;
     }

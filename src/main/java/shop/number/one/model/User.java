@@ -1,23 +1,29 @@
 package shop.number.one.model;
 
-import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 import java.util.UUID;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 @Setter
-@DynamicInsert
-@DynamicUpdate
 @Entity
 @Table
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
     private String nickname;
     private String email;
