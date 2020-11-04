@@ -63,7 +63,7 @@ create table "ORDERS"
   CONSTRAINT "ORDERS_PKEY" PRIMARY KEY ("ID")
 );
 
-create table EMPLOYEE_DEPARTMENT
+/*create table EMPLOYEE_DEPARTMENT
 (
   "EMPLOYEE_ID"   BIGINT NOT NULL,
   "DEPARTMENT_ID" BIGINT NOT NULL,
@@ -87,4 +87,4 @@ values
   (7, 4),
   (8, 4),
   (9, 1),
-  (10, 3);
+  (10, 3);*/

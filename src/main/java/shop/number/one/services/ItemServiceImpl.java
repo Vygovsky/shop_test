@@ -1,11 +1,11 @@
+
 package shop.number.one.services;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop.number.one.model.Category;
 import shop.number.one.model.Item;
-import shop.number.one.repositories.ItemRepositoryImpl;
+import shop.number.one.repositories.ItemRepository;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,21 +13,30 @@ import java.util.List;
 @Service
 public class ItemServiceImpl implements ItemService {
 
-    private final ItemRepositoryImpl itemRepository;
+private ItemRepository itemRepository;
+    @Override
+    public List<Item> itemsByCategory(Category category) {
+        return null;
+    }
 
-    @Autowired
-    public ItemServiceImpl(ItemRepositoryImpl itemRepository) {
-        this.itemRepository = itemRepository;
+    @Override
+    public void quantityItemByCategory(long id, int amount) {
+
+    }
+
+    @Override
+    public long getCount(long id) {
+        return 0;
     }
 
     @Override
     public Collection<Item> findAll() {
-        return itemRepository.findAll();
+        return null;
     }
 
     @Override
-    public Item findById(Long id) {
-        return itemRepository.findById(id);
+    public Item findById(Long aLong) {
+        return null;
     }
 
     @Override
@@ -36,22 +45,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public Item update(Item object) {
+        return null;
+    }
+
+    @Override
     public void delete(Long aLong) {
-    }
 
-    @Override
-    public List<Item> itemsByCategory(Category category) {
-        return itemRepository.itemsByCategory(category);
     }
-
-    @Override
-    public void quantityItemByCategory(long id, int amount) {
-        itemRepository.quantityItemByCategory(id, amount);
-    }
-
-    @Override
-    public long getCount(long id) {
-        return itemRepository.getCount(id);
-    }
-
 }
+

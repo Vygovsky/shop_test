@@ -1,47 +1,58 @@
 package shop.number.one.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table (name = "ORDERS")
+@Table(name = "ORDERS")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Long id;
     @OneToOne
-    @JoinColumn(name = "CATEGORY_ID", unique = true, nullable = false)
+    @JoinColumn(name = "USER_ID", unique = true, nullable = false)
     private User user;
 
-    private Map<Item, Long> items = new HashMap<>();
+    @OneToMany(mappedBy = "order",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private List<OrderItem> orderItems = new ArrayList<>();
 
-    public Order(User user) {
-        this.id = UUID.randomUUID();
+ /*   public Order(Long id, User user) {
+        this.id = id;
         this.user = user;
+    }*/
+
+
+    public void addItem(OrderItem orderItem) {
+       orderItems.add(orderItem);
+       orderItem.setOrder(this);
     }
 
-    public void addItem(Item item) {
-        addItem(item, 1);
+    public void removeItem(OrderItem orderItem) {
+        orderItems.remove(orderItem);
+        orderItem.setOrder(null);
     }
 
-    public void addItem(Item item, long amount) {
-        items.put(item, items.getOrDefault(item, 0L) + amount);
-    }
+
 
     @Override
     public boolean equals(final Object o) {
@@ -72,7 +83,7 @@ public class Order {
         return "Order{" +
                 "id=" + this.getId() +
                 ", user=" + this.getUser() +
-                ", items=" + this.getItems() +
+                ", items=" + this.getOrderItems() +
                 '}';
     }
 }

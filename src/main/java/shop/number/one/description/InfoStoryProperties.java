@@ -1,4 +1,4 @@
-package shop.number.one.model;
+package shop.number.one.description;
 
 public class InfoStoryProperties {
     public static final String GREETING_USER_INFO = "Представтесь пожалуйста и введите следующую информацию:\n";

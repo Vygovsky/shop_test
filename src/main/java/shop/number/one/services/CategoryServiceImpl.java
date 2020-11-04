@@ -1,30 +1,31 @@
+
 package shop.number.one.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shop.number.one.model.Category;
-import shop.number.one.repositories.CategoryRepositoryImpl;
+import shop.number.one.repositories.CategoryRepository;
 
 import java.util.Collection;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private final CategoryRepositoryImpl categoryRepository;
+    private CategoryRepository categoryService;
 
     @Autowired
-    public CategoryServiceImpl(CategoryRepositoryImpl categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public void setCategoryService(CategoryRepository repository) {
+        this.categoryService = repository;
     }
 
     @Override
     public Collection<Category> findAll() {
-        return categoryRepository.findAll();
+        return categoryService.findAll();
     }
 
     @Override
-    public Category findById(Long id) {
-        return categoryRepository.findById(id);
+    public Category findById(Long aLong) {
+        return null;
     }
 
     @Override
@@ -33,7 +34,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void delete(Long aLong) {
+    public Category update(Category object) {
+        return null;
     }
 
+    @Override
+    public void delete(Long aLong) {
+
+    }
+
+    @Override
+    public String getCategoryName(String nameCategory) {
+        return categoryService.getCategoryName(nameCategory);
+    }
 }
+

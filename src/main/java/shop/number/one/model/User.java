@@ -10,8 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -28,9 +30,11 @@ public class User {
     private String nickname;
     private String email;
     private Date birthday;
+    @OneToOne(mappedBy = "user")
+    private Set<Order> order;
 
-    public User(String nickname, String email, Date birthday) {
-        this(UUID.randomUUID(), nickname, email, birthday);
+    public User(String nickname, String email, Date birthday, Set<Order> order) {
+        this(UUID.randomUUID(), nickname, email, birthday, order);
     }
 
     @Override

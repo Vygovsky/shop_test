@@ -10,5 +10,7 @@ public interface CrudService<T, ID> {
 
     T save(T object);
 
+    T update(T object);
+
     void delete(ID id);
 }

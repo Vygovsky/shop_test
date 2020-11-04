@@ -15,18 +15,18 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import static shop.number.one.model.InfoStoryProperties.CHOOSE_CATEGORY_ID_USER_MESSAGE;
-import static shop.number.one.model.InfoStoryProperties.CHOOSE_CATEGORY_USER_MESSAGE;
-import static shop.number.one.model.InfoStoryProperties.CHOOSE_ITEM_ID_USER_MESSAGE;
-import static shop.number.one.model.InfoStoryProperties.CHOOSE_ITEM_VALUE_MESSAGE;
-import static shop.number.one.model.InfoStoryProperties.GREETING_MESSAGE;
-import static shop.number.one.model.InfoStoryProperties.GREETING_USER_BIRTHDAY;
-import static shop.number.one.model.InfoStoryProperties.GREETING_USER_EMAIL;
-import static shop.number.one.model.InfoStoryProperties.GREETING_USER_INFO;
-import static shop.number.one.model.InfoStoryProperties.GREETING_USER_NICKNAME;
-import static shop.number.one.model.InfoStoryProperties.GREETING_USER_REGISTRATION;
-import static shop.number.one.model.InfoStoryProperties.NOT_GOODS_MESSAGE;
-import static shop.number.one.model.InfoStoryProperties.NOT_VALID_CATEGORY_MESSAGE;
+import static shop.number.one.description.InfoStoryProperties.CHOOSE_CATEGORY_ID_USER_MESSAGE;
+import static shop.number.one.description.InfoStoryProperties.CHOOSE_CATEGORY_USER_MESSAGE;
+import static shop.number.one.description.InfoStoryProperties.CHOOSE_ITEM_ID_USER_MESSAGE;
+import static shop.number.one.description.InfoStoryProperties.CHOOSE_ITEM_VALUE_MESSAGE;
+import static shop.number.one.description.InfoStoryProperties.GREETING_MESSAGE;
+import static shop.number.one.description.InfoStoryProperties.GREETING_USER_BIRTHDAY;
+import static shop.number.one.description.InfoStoryProperties.GREETING_USER_EMAIL;
+import static shop.number.one.description.InfoStoryProperties.GREETING_USER_INFO;
+import static shop.number.one.description.InfoStoryProperties.GREETING_USER_NICKNAME;
+import static shop.number.one.description.InfoStoryProperties.GREETING_USER_REGISTRATION;
+import static shop.number.one.description.InfoStoryProperties.NOT_GOODS_MESSAGE;
+import static shop.number.one.description.InfoStoryProperties.NOT_VALID_CATEGORY_MESSAGE;
 
 public class Demo {
     private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");

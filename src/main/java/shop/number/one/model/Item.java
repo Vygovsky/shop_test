@@ -1,15 +1,18 @@
 package shop.number.one.model;
 
-import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,7 +21,6 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @Entity
-
 @Table
 public class Item {
     @Id
@@ -26,16 +28,17 @@ public class Item {
     private Long id;
     private String name;
     private int price;
-    @Column(name = "AVAILABLE_COUNT")
-    private long availableCount;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "CATEGORY_ID", unique = true, nullable = false)
     private Category category;
+    @OneToOne(mappedBy = "item",
+            fetch = FetchType.LAZY, optional = false,
+            cascade = CascadeType.ALL)
+    private OrderItem orderItem;
 
-    public Item(String name, int price, long availableCount, Category category) {
+    public Item(String name, int price, Category category) {
         this.name = name;
         this.price = price;
-        this.availableCount = availableCount;
         this.category = category;
     }
 
@@ -69,7 +72,6 @@ public class Item {
                 "id=" + this.getId() +
                 ", name='" + this.getName() + '\'' +
                 ", price=" + this.getPrice() +
-                ", availableCount=" + this.getAvailableCount() +
                 ", category=" + this.getCategory() +
                 '}';
     }

@@ -4,5 +4,5 @@ import shop.number.one.model.Category;
 
 
 public interface CategoryRepository extends CrudRepository<Category, Long> {
-    String getCategoryName(long id);
+    String getCategoryName(String nameCategory);
 }
