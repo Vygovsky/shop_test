@@ -1,23 +1,12 @@
 package shop.number.one.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.*;
+import java.util.Set;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -27,32 +16,35 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    @JoinColumn(name = "USER_ID", unique = true, nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", unique = true, nullable = false)
     private User user;
 
     @OneToMany(mappedBy = "order",
             cascade = CascadeType.ALL,
             orphanRemoval = true)
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private Set<OrdersItem> ordersItems;
 
- /*   public Order(Long id, User user) {
+    public Order(Long id, User user) {
         this.id = id;
         this.user = user;
-    }*/
-
-
-    public void addItem(OrderItem orderItem) {
-       orderItems.add(orderItem);
-       orderItem.setOrder(this);
     }
 
-    public void removeItem(OrderItem orderItem) {
-        orderItems.remove(orderItem);
-        orderItem.setOrder(null);
+    public Order(Long id, User user, Set<OrdersItem> ordersItems) {
+        this.id = id;
+        this.user = user;
+        this.ordersItems = ordersItems;
     }
 
+    public void addItem(OrdersItem ordersItem) {
+        ordersItems.add(ordersItem);
+        ordersItem.setOrder(this);
+    }
 
+    public void removeItem(OrdersItem ordersItem) {
+        ordersItems.remove(ordersItem);
+        ordersItem.setOrder(null);
+    }
 
     @Override
     public boolean equals(final Object o) {
@@ -83,7 +75,7 @@ public class Order {
         return "Order{" +
                 "id=" + this.getId() +
                 ", user=" + this.getUser() +
-                ", items=" + this.getOrderItems() +
+                ", items=" + this.getOrdersItems() +
                 '}';
     }
 }

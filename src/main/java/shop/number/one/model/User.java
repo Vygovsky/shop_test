@@ -6,12 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
@@ -26,15 +21,23 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+   // private UUID id;
+    private Long id;
     private String nickname;
     private String email;
     private Date birthday;
-    @OneToOne(mappedBy = "user")
-    private Set<Order> order;
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orders;
 
-    public User(String nickname, String email, Date birthday, Set<Order> order) {
-        this(UUID.randomUUID(), nickname, email, birthday, order);
+ /*   public User(String nickname, String email, Date birthday, Set<Order> orders) {
+        this(UUID.randomUUID(), nickname, email, birthday, orders);
+    }*/
+
+    public User(Long id, String nickname, String email, Date birthday) {
+        this.id = id;
+        this.nickname = nickname;
+        this.email = email;
+        this.birthday = birthday;
     }
 
     @Override

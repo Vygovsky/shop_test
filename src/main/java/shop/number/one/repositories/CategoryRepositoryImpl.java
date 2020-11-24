@@ -11,10 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Repository
@@ -22,7 +19,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     private final static String BD_FIND_ALL_CATEGORY = "SELECT*FROM CATEGORY";
     private final static String BD_FIND_BY_ID_CATEGORY = "SELECT * FROM CATEGORY WHERE ID=?";
-    //private final static String BD_INSERT_CATEGORY = "INSERT INTO CATEGORY (NAME) VALUES (?)";
+    private final static String BD_INSERT_CATEGORY = "INSERT INTO CATEGORY (NAME) VALUES (?)";
     private final static String BD_DELETE_CATEGORY = "DELETE FROM CATEGORY WHERE ID=?";
     private final static String BD_UPDATE_CATEGORY = "UPDATE CATEGORY SET NAME = ? WHERE ID = ?";
     private final static String BD_UPDATE_CATEGORY_BY_NAME = "SELECT * FROM CATEGORY WHERE NAME=?";
@@ -32,10 +29,10 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public String getCategoryName(String category) {
-        Connection connection=null;
-        Category categoryName=new Category();
-        try{
-            connection=dataSource.getConnection();
+        Connection connection = null;
+        Category categoryName = new Category();
+        try {
+            connection = dataSource.getConnection();
             connection.setAutoCommit(false);
             PreparedStatement preparedStatement = connection.prepareStatement(BD_UPDATE_CATEGORY_BY_NAME);
             preparedStatement.setString(1, category);
@@ -45,7 +42,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 categoryName.setName(resultSet.getString("name"));
             }
 
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println("SQLException. Executing rollback to savepoint..." + ex);
             ifRollback(connection);
         }
@@ -108,7 +105,19 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public Category save(Category category) {
-        return null;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            connection.setAutoCommit(false);
+            PreparedStatement preparedStatement = connection.prepareStatement(BD_INSERT_CATEGORY);
+            preparedStatement.setString(1, category.getName());
+            preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException ex) {
+            System.out.println("SQLException. Executing rollback to savepoint..." + ex);
+            ifRollback(connection);
+        }
+        return category;
     }
 
     @Override

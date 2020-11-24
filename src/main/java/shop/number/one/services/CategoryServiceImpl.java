@@ -11,16 +11,16 @@ import java.util.Collection;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryRepository categoryService;
+    private CategoryRepository categoryRepository;
 
     @Autowired
-    public void setCategoryService(CategoryRepository repository) {
-        this.categoryService = repository;
+    public void setCategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
     public Collection<Category> findAll() {
-        return categoryService.findAll();
+        return categoryRepository.findAll();
     }
 
     @Override
@@ -29,8 +29,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category save(Category object) {
-        return null;
+    public Category save(Category category) {
+        return categoryRepository.save(category);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public String getCategoryName(String nameCategory) {
-        return categoryService.getCategoryName(nameCategory);
+        return categoryRepository.getCategoryName(nameCategory);
     }
 }
 

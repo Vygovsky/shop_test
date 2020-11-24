@@ -3,70 +3,53 @@ package shop.number.one.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import shop.number.one.model.Category;
-import shop.number.one.model.Item;
+import shop.number.one.model.OrdersItem;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 @Repository
-public class ItemRepositoryImpl implements ItemRepository {
-
-    private final static String BD_INSERT_ITEM = "INSERT INTO ITEM (NAME,PRICE, CATEGORY_ID) VALUES (?,?,?)";
+public class OrdersItemRepositoryImpl implements OrdersItemRepository {
+    private final static String BD_INSERT_ORDER_ITEM = "INSERT INTO ORDERS_ITEM (COUNT, ITEM_ID, ORDER_ID) VALUES (?,?,?)";
     @Autowired
     private DataSource dataSource;
 
+
     @Override
-    public List<Item> itemsByCategory(Category category) {
+    public Collection<OrdersItem> findAll() {
         return null;
     }
 
     @Override
-    public void quantityItemByCategory(long id, int amount) {
-
-    }
-
-    @Override
-    public long getCount(long id) {
-        return 0;
-    }
-
-    @Override
-    public Collection<Item> findAll() {
+    public OrdersItem findById(Long aLong) {
         return null;
     }
 
     @Override
-    public Item findById(Long aLong) {
-        return null;
-    }
-
-    @Override
-    public Item save(Item item) {
+    public OrdersItem save(OrdersItem ordersItem) {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
             connection.setAutoCommit(false);
-            PreparedStatement preparedStatement = connection.prepareStatement(BD_INSERT_ITEM);
-            preparedStatement.setString(1, item.getName());
-            preparedStatement.setInt(2, item.getPrice());
-            preparedStatement.setLong(3, item.getCategory().getId());
+            PreparedStatement preparedStatement = connection.prepareStatement(BD_INSERT_ORDER_ITEM);
+            preparedStatement.setInt(1, ordersItem.getCount());
+            preparedStatement.setLong(2, ordersItem.getItem().getId());
+            preparedStatement.setLong(3, ordersItem.getOrder().getId());
             preparedStatement.executeUpdate();
             connection.commit();
         } catch (SQLException ex) {
             System.out.println("SQLException. Executing rollback to savepoint..." + ex);
             ifRollback(connection);
         }
-        return item;
+        return ordersItem;
     }
 
     @Override
-    public Item update(Item object) {
+    public OrdersItem update(OrdersItem object) {
         return null;
     }
 

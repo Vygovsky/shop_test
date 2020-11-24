@@ -5,13 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.util.List;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @Getter
@@ -19,29 +13,35 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table
-public class Category {
+public class OrdersItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @OneToMany(mappedBy = "category", orphanRemoval = true)
-    private List<Item> item;
+    @OneToOne(fetch = FetchType.LAZY)
+    private Item item;
+    private int count;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", unique = true, nullable = false)
+    private Order order;
 
-    public Category(Long id, String name) {
+    public OrdersItem(Long id, Item item, int count) {
         this.id = id;
-        this.name = name;
+        this.item = item;
+        this.count = count;
     }
 
-
-    public Category(String name) {
-        this.name = name;
-    }
+  /*  public OrdersItem(Long id, Item item, int count, Order order) {
+        this.id = id;
+        this.item = item;
+        this.count = count;
+        this.order = order;
+    }*/
 
     @Override
     public boolean equals(final Object o) {
         if (o == this) return true;
-        if (!(o instanceof Category)) return false;
-        final Category other = (Category) o;
+        if (!(o instanceof Order)) return false;
+        final Order other = (Order) o;
         if (!other.canEqual(this)) return false;
         final Object this$id = this.getId();
         final Object other$id = other.getId();
@@ -49,7 +49,7 @@ public class Category {
     }
 
     protected boolean canEqual(final Object other) {
-        return other instanceof Category;
+        return other instanceof Order;
     }
 
     @Override
@@ -63,9 +63,11 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category{" +
+        return "OrdersItem{" +
                 "id=" + this.getId() +
-                ", name='" + this.getName() + '\'' +
+                ", count=" + this.getCount() +
+                ", item=" + this.getItem() +
+                //     ", order=" + this.getOrder() +
                 '}';
     }
 }

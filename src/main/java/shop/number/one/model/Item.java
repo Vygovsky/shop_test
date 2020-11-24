@@ -34,7 +34,14 @@ public class Item {
     @OneToOne(mappedBy = "item",
             fetch = FetchType.LAZY, optional = false,
             cascade = CascadeType.ALL)
-    private OrderItem orderItem;
+    private OrdersItem ordersItem;
+
+    public Item(Long id, String name, int price, Category category) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.category=category;
+    }
 
     public Item(String name, int price, Category category) {
         this.name = name;

@@ -40,7 +40,8 @@ public class UserRepositoryImpl implements UserRepository {
             ResultSet resultSet = statement.executeQuery(BD_FIND_ALL_USERS);
             while (resultSet.next()) {
                 User user = new User();
-                user.setId(UUID.fromString(resultSet.getString("id")));
+                //user.setId(UUID.fromString(resultSet.getString("id")));
+                user.setId(resultSet.getLong("id"));
                 user.setNickname(resultSet.getString("nickName"));
                 user.setEmail(resultSet.getString("email"));
                 user.setBirthday(resultSet.getDate("birthday"));
@@ -64,7 +65,8 @@ public class UserRepositoryImpl implements UserRepository {
             preparedStatement.setString(1, String.valueOf(uuid));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                user.setId(UUID.fromString(resultSet.getString("id")));
+               // user.setId(UUID.fromString(resultSet.getString("id")));
+                user.setId(resultSet.getLong("id"));
                 user.setNickname(resultSet.getString("nickName"));
                 user.setEmail(resultSet.getString("email"));
                 user.setBirthday(resultSet.getDate("birthday"));
