@@ -31,6 +31,7 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "CATEGORY_ID", unique = true, nullable = false)
     private Category category;
+
     @OneToOne(mappedBy = "item",
             fetch = FetchType.LAZY, optional = false,
             cascade = CascadeType.ALL)

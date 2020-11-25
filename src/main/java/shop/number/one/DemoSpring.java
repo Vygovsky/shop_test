@@ -17,7 +17,7 @@ import java.util.UUID;
 @SpringBootApplication
 public class DemoSpring implements CommandLineRunner {
     @Autowired
-    private CategoryRepositoryImpl repositoryCategory;
+    private CategoryRepository repositoryCategory;
     @Autowired
     private ItemRepository itemRepository;
     @Autowired
@@ -33,39 +33,43 @@ public class DemoSpring implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+
         Category categoryFood = new Category(1L, "Food");
         Category categorySkits = new Category(2L, "Skits");
 
         Item item = new Item(1L, "sock", 20, categoryFood);
         Item item2 = new Item(2L, "ball", 35, categorySkits);
+        Item item3 = new Item(3L, "miniBall", 35, categorySkits);
 
         User user = new User(1L, "Roman", "ron@ukr.net", new Date());
 
         Order order = new Order(1L, user);
-      //  Order order221 = new Order(1L, user);
 
         OrdersItem ordersItem = new OrdersItem(1L, item, 20, order);
-    //    OrdersItem ordersItem2 = new OrdersItem(2L, item2, 30, order221);
-
-       /* Set<OrdersItem> itemSet = new HashSet<>();
-        itemSet.add(ordersItem);
-        itemSet.add(ordersItem2);*/
+        OrdersItem ordersItem2 = new OrdersItem(2L, item2, 30, order);
+        OrdersItem ordersItem3 = new OrdersItem(3L, item3, 45, order);
 
 
-        User save1 = userRepository.save(user);
+        userRepository.save(user);
 
-        Category category = repositoryCategory.save(categoryFood);
-        Category category1 = repositoryCategory.save(categorySkits);
+        repositoryCategory.save(categoryFood);
+        repositoryCategory.save(categorySkits);
+        itemRepository.save(item);
+        itemRepository.save(item2);
+        itemRepository.save(item3);
+        orderRepository.save(order);
 
-        Item item11 = itemRepository.save(item);
-        Item item22 = itemRepository.save(item2);
 
-        Order order1 = orderRepository.save(order);
-        //    Order order2= orderRepository.save(order221);
-
-        OrdersItem ordersItem1 = ordersItemRepository.save(ordersItem);
-       // OrdersItem ordersItem3 = ordersItemRepository.save(ordersItem2);
-
+        ordersItemRepository.save(ordersItem);
+        ordersItemRepository.save(ordersItem2);
+        ordersItemRepository.save(ordersItem3);
 
     }
+ /*  Set<OrdersItem> itemSet = new HashSet<>();
+        itemSet.add(ordersItem);
+        itemSet.add(ordersItem2);
+        itemSet.add(ordersItem3);*/
+    //    Order order2= orderRepository.save(order221);
+    //  itemRepository.findAll().forEach(System.out::println);
 }

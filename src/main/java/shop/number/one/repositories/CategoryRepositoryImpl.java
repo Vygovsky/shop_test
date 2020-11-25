@@ -72,15 +72,6 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         return categories;
     }
 
-    private void ifRollback(Connection connection) {
-        if (Objects.nonNull(connection)) {
-            try {
-                connection.rollback();
-            } catch (SQLException e) {
-                //do nothing, but it could be logged
-            }
-        }
-    }
 
     @Override
     public Category findById(Long id) {
@@ -130,5 +121,14 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         System.out.println("You don`t delete category");
     }
 
+    private void ifRollback(Connection connection) {
+        if (Objects.nonNull(connection)) {
+            try {
+                connection.rollback();
+            } catch (SQLException e) {
+                //do nothing, but it could be logged
+            }
+        }
+    }
 }
 
