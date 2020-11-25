@@ -33,8 +33,6 @@ public class DemoSpring implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-
         Category categoryFood = new Category(1L, "Food");
         Category categorySkits = new Category(2L, "Skits");
 

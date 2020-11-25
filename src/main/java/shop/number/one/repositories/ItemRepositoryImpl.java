@@ -46,7 +46,6 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     @Override
     public Collection<Item> findAll() {
-
         Connection connection = null;
         List<Item> items = new ArrayList<>();
         try {
