@@ -49,8 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
         System.out.println("Your don`t delete category");
     }
 
-
-
+    
     @Override
     public String getCategoryName(String nameCategory) {
         return categoryRepository.getCategoryName(nameCategory);
