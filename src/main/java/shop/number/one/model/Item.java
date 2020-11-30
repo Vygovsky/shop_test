@@ -5,22 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
+@SequenceGenerator(name = "SECQNAMEINENTITY", sequenceName = "DB_SECQ NAME", allocationSize = 1)
 @Table
 public class Item {
     @Id
@@ -28,7 +20,7 @@ public class Item {
     private Long id;
     private String name;
     private int price;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CATEGORY_ID", unique = true, nullable = false)
     private Category category;
 
@@ -41,7 +33,7 @@ public class Item {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.category=category;
+        this.category = category;
     }
 
     public Item(String name, int price, Category category) {
@@ -49,6 +41,7 @@ public class Item {
         this.price = price;
         this.category = category;
     }
+
 
     @Override
     public boolean equals(final Object o) {

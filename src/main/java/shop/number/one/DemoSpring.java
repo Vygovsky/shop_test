@@ -19,7 +19,7 @@ public class DemoSpring implements CommandLineRunner {
     @Autowired
     private CategoryRepository repositoryCategory;
     @Autowired
-    private ItemRepository itemRepository;
+    private ItemRepositoryImpl itemRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -35,39 +35,30 @@ public class DemoSpring implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Category categoryFood = new Category(1L, "Food");
         Category categorySkits = new Category(2L, "Skits");
+        repositoryCategory.save(categoryFood);
+        repositoryCategory.save(categorySkits);
+
 
         Item item = new Item(1L, "sock", 20, categoryFood);
         Item item2 = new Item(2L, "ball", 35, categorySkits);
         Item item3 = new Item(3L, "miniBall", 35, categorySkits);
+        itemRepository.save(item);
+        itemRepository.save(item2);
+        itemRepository.save(item3);
 
         User user = new User(1L, "Roman", "ron@ukr.net", new Date());
+        userRepository.save(user);
 
         Order order = new Order(1L, user);
+        orderRepository.save(order);
 
         OrdersItem ordersItem = new OrdersItem(1L, item, 20, order);
         OrdersItem ordersItem2 = new OrdersItem(2L, item2, 30, order);
         OrdersItem ordersItem3 = new OrdersItem(3L, item3, 45, order);
-
-
-        userRepository.save(user);
-
-        repositoryCategory.save(categoryFood);
-        repositoryCategory.save(categorySkits);
-        itemRepository.save(item);
-        itemRepository.save(item2);
-        itemRepository.save(item3);
-        orderRepository.save(order);
-
-
         ordersItemRepository.save(ordersItem);
         ordersItemRepository.save(ordersItem2);
         ordersItemRepository.save(ordersItem3);
-
+        //itemRepository.findAll().forEach(System.out::println);
     }
- /*  Set<OrdersItem> itemSet = new HashSet<>();
-        itemSet.add(ordersItem);
-        itemSet.add(ordersItem2);
-        itemSet.add(ordersItem3);*/
-    //    Order order2= orderRepository.save(order221);
-    //  itemRepository.findAll().forEach(System.out::println);
+
 }

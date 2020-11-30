@@ -24,16 +24,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "category", orphanRemoval = true)
-    private List<Item> item;
+    @OneToMany(mappedBy = "category", orphanRemoval = true )
+    private List<Item> items;
 
     public Category(Long id, String name) {
         this.id = id;
-        this.name = name;
-    }
-
-
-    public Category(String name) {
         this.name = name;
     }
 
