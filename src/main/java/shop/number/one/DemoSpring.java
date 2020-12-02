@@ -46,7 +46,7 @@ public class DemoSpring implements CommandLineRunner {
         itemRepository.save(item2);
         itemRepository.save(item3);
 
-        User user = new User(1L, "Roman", "ron@ukr.net", new Date());
+       /* User user = new User(1L, "Roman", "ron@ukr.net", new Date());
         userRepository.save(user);
 
         Order order = new Order(1L, user);
@@ -57,7 +57,7 @@ public class DemoSpring implements CommandLineRunner {
         OrdersItem ordersItem3 = new OrdersItem(3L, item3, 45, order);
         ordersItemRepository.save(ordersItem);
         ordersItemRepository.save(ordersItem2);
-        ordersItemRepository.save(ordersItem3);
+        ordersItemRepository.save(ordersItem3);*/
         //itemRepository.findAll().forEach(System.out::println);
     }
 

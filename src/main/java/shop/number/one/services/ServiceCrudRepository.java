@@ -2,7 +2,7 @@ package shop.number.one.services;
 
 import java.util.Collection;
 
-public interface CrudService<T, ID> {
+public interface ServiceCrudRepository<T, ID> {
 
     Collection<T> findAll();
 
