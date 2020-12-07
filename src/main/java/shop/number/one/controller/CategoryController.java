@@ -1,7 +1,5 @@
 package shop.number.one.controller;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +14,16 @@ import shop.number.one.services.CategoryService;
 
 import java.util.Collection;
 
-@RequiredArgsConstructor
+
 @RestController
 @RequestMapping("/api")
 public class CategoryController {
 
     private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @ResponseBody
     @GetMapping(path = "/categories", produces = "application/json")
@@ -45,12 +47,12 @@ public class CategoryController {
     }
 
     @GetMapping(path = "/category/{id}")
-    public Category getUserById(@PathVariable("id") long id) {
+    public Category getUserById(@PathVariable("id") Long id) {
         return categoryService.findById(id);
     }
 
     @DeleteMapping("/category/delete/{id}")
-    public void deleteById(@PathVariable("id") long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         categoryService.delete(id);
     }
 

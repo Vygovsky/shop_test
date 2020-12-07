@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Entity
-@SequenceGenerator(name = "SECQNAMEINENTITY", sequenceName = "DB_SECQ NAME", allocationSize = 1)
+//@SequenceGenerator(name = "SECQNAMEINENTITY", sequenceName = "DB_SECQ NAME", allocationSize = 1)
 @Table
 public class Item {
     @Id

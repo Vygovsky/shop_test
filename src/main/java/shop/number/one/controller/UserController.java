@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import shop.number.one.model.User;
+import shop.number.one.services.UserService;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -27,7 +28,7 @@ public class UserController {
 
     @ResponseBody
     @GetMapping(path = "/users", produces = "application/json")
-    public Collection<User> getAllUsers()  {
+    public Collection<User> getAllUsers() {
         return userService.findAll();
     }
 

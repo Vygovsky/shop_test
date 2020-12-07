@@ -1,6 +1,5 @@
 package shop.number.one.services;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import shop.number.one.model.Category;
 import shop.number.one.model.Item;
@@ -9,10 +8,14 @@ import shop.number.one.repositories.ItemRepository;
 import java.util.Collection;
 import java.util.List;
 
-@RequiredArgsConstructor
+
 @Service
 public class ItemService {
     private final ItemRepository itemRepository;
+
+    public ItemService(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
 
     public List<Item> itemsByCategory(Category category) {
         return itemRepository.itemsByCategory(category);

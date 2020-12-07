@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 @Table
 public class Category {
@@ -30,6 +29,9 @@ public class Category {
     public Category(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Category() {
     }
 
     @Override

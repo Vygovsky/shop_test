@@ -1,38 +1,40 @@
 package shop.number.one.services;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import shop.number.one.model.Category;
-import shop.number.one.model.Item;
 import shop.number.one.model.User;
-import shop.number.one.repositories.ItemRepository;
 import shop.number.one.repositories.UserRepository;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
-@RequiredArgsConstructor
+
 @Service
 public class UserService {
 
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public Collection<User> findAll() {
-        return null;
+        return userRepository.findAll();
     }
 
     public User findById(UUID uuid) {
-        return null;
+        return userRepository.findById(uuid);
     }
 
-    public User save(User object) {
-        return null;
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
-    public User update(User object) {
-        return null;
+    public User update(User user) {
+        return user;
     }
 
     public void delete(UUID uuid) {
+        userRepository.delete(uuid);
 
     }
 }

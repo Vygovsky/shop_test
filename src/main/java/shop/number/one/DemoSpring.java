@@ -15,23 +15,23 @@ import java.util.UUID;
 
 
 @SpringBootApplication
-public class DemoSpring implements CommandLineRunner {
-    @Autowired
+public class DemoSpring/* implements CommandLineRunner*/ {
+    /*@Autowired
     private CategoryRepository repositoryCategory;
     @Autowired
-    private ItemRepositoryImpl itemRepository;
+    private ItemRepository itemRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private OrdersItemRepository ordersItemRepository;
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderRepository orderRepository;*/
 
     public static void main(String[] args) {
         SpringApplication.run(DemoSpring.class, args);
     }
 
-    @Override
+/*    @Override
     public void run(String... args) throws Exception {
         Category categoryFood = new Category(1L, "Food");
         Category categorySkits = new Category(2L, "Skits");
@@ -44,7 +44,7 @@ public class DemoSpring implements CommandLineRunner {
         Item item3 = new Item(3L, "miniBall", 35, categorySkits);
         itemRepository.save(item);
         itemRepository.save(item2);
-        itemRepository.save(item3);
+        itemRepository.save(item3);*/
 
        /* User user = new User(1L, "Roman", "ron@ukr.net", new Date());
         userRepository.save(user);
@@ -59,6 +59,6 @@ public class DemoSpring implements CommandLineRunner {
         ordersItemRepository.save(ordersItem2);
         ordersItemRepository.save(ordersItem3);*/
         //itemRepository.findAll().forEach(System.out::println);
-    }
+    //}
 
 }

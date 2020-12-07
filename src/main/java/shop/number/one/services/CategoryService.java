@@ -1,17 +1,20 @@
 package shop.number.one.services;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import shop.number.one.model.Category;
 import shop.number.one.repositories.CategoryRepository;
 
 import java.util.Collection;
 
-@RequiredArgsConstructor
+
 @Service
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
     public String getCategoryName(String nameCategory) {
         return categoryRepository.getCategoryName(nameCategory);
