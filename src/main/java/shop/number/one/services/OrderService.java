@@ -6,7 +6,6 @@ import shop.number.one.repositories.OrderRepository;
 
 import java.util.Collection;
 
-
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;

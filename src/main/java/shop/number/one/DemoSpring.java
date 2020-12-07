@@ -15,7 +15,7 @@ import java.util.UUID;
 
 
 @SpringBootApplication
-public class DemoSpring/* implements CommandLineRunner*/ {
+public class DemoSpring implements CommandLineRunner {
     /*@Autowired
     private CategoryRepository repositoryCategory;
     @Autowired
@@ -31,9 +31,12 @@ public class DemoSpring/* implements CommandLineRunner*/ {
         SpringApplication.run(DemoSpring.class, args);
     }
 
-/*    @Override
+    @Override
     public void run(String... args) throws Exception {
-        Category categoryFood = new Category(1L, "Food");
+        Category category=new Category(1L,"Rock" );
+        System.out.println(category);
+    }
+       /* Category categoryFood = new Category(1L, "Food");
         Category categorySkits = new Category(2L, "Skits");
         repositoryCategory.save(categoryFood);
         repositoryCategory.save(categorySkits);

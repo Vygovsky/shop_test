@@ -8,7 +8,6 @@ import shop.number.one.repositories.ItemRepository;
 import java.util.Collection;
 import java.util.List;
 
-
 @Service
 public class ItemService {
     private final ItemRepository itemRepository;

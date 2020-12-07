@@ -1,3 +1,4 @@
+/*
 package shop.number.one.repositories;
 
 import java.util.Collection;
@@ -14,3 +15,4 @@ public interface CrudRepository<T, ID> {
 
     void delete(ID id);
 }
+*/

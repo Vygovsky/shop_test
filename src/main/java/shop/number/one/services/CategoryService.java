@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import shop.number.one.model.Category;
 import shop.number.one.repositories.CategoryRepository;
 
-import java.util.Collection;
+import java.util.Optional;
 
 
 @Service
@@ -20,12 +20,11 @@ public class CategoryService {
         return categoryRepository.getCategoryName(nameCategory);
     }
 
-    public Collection<Category> findAll() {
+    public Iterable<Category> findAll() {
         return categoryRepository.findAll();
     }
 
-
-    public Category findById(Long id) {
+    public Optional<Category> findById(Long id) {
         return categoryRepository.findById(id);
     }
 
@@ -34,12 +33,7 @@ public class CategoryService {
     }
 
 
-    public Category update(Category category) {
-        return categoryRepository.update(category);
-    }
-
-
     public void delete(Long id) {
-        categoryRepository.delete(id);
+        categoryRepository.deleteById(id);
     }
 }

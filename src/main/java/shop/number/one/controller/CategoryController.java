@@ -14,7 +14,6 @@ import shop.number.one.services.CategoryService;
 
 import java.util.Collection;
 
-
 @RestController
 @RequestMapping("/api")
 public class CategoryController {
