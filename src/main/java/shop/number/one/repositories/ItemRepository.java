@@ -9,9 +9,9 @@ import java.util.List;
 @Repository
 public interface ItemRepository extends CrudRepository<Item, Long> {
 
-    List<Item> itemsByCategory(Category category);
+/*    List<Item> itemsByCategory(Category category);
 
     void quantityItemByCategory(long id, int amount);
 
-    long getCount(long id);
+    long getCount(long id);*/
 }

@@ -5,8 +5,8 @@ import shop.number.one.model.Category;
 import shop.number.one.model.Item;
 import shop.number.one.repositories.ItemRepository;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -16,7 +16,7 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
-    public List<Item> itemsByCategory(Category category) {
+  /*  public List<Item> itemsByCategory(Category category) {
         return itemRepository.itemsByCategory(category);
     }
 
@@ -26,13 +26,13 @@ public class ItemService {
 
     public long getCount(long id) {
         return itemRepository.getCount(id);
-    }
+    }*/
 
-    public Collection<Item> findAll() {
+    public Iterable<Item> findAll() {
         return itemRepository.findAll();
     }
 
-    public Item findById(Long id) {
+    public Optional<Item> findById(Long id) {
         return itemRepository.findById(id);
     }
 
@@ -40,11 +40,7 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
-    public void update(Item item) {
-        itemRepository.update(item);
-    }
-
     public void delete(Long id) {
-        itemRepository.delete(id);
+        itemRepository.deleteById(id);
     }
 }

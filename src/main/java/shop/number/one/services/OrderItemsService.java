@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import shop.number.one.model.OrdersItem;
 import shop.number.one.repositories.OrdersItemRepository;
 
-import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class OrderItemsService {
@@ -15,11 +15,11 @@ public class OrderItemsService {
         this.ordersItemRepository = ordersItemRepository;
     }
 
-    public Collection<OrdersItem> findAll() {
+    public Iterable<OrdersItem> findAll() {
         return ordersItemRepository.findAll();
     }
 
-    public OrdersItem findById(Long id) {
+    public Optional<OrdersItem> findById(Long id) {
         return ordersItemRepository.findById(id);
     }
 
@@ -27,11 +27,8 @@ public class OrderItemsService {
         return ordersItemRepository.save(ordersItem);
     }
 
-    public OrdersItem update(OrdersItem ordersItem) {
-        return ordersItemRepository.update(ordersItem);
-    }
 
     public void delete(Long id) {
-        ordersItemRepository.delete(id);
+        ordersItemRepository.deleteById(id);
     }
 }

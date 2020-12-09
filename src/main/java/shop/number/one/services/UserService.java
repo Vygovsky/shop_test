@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import shop.number.one.model.User;
 import shop.number.one.repositories.UserRepository;
 
-import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -17,11 +17,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Collection<User> findAll() {
+    public Iterable<User> findAll() {
         return userRepository.findAll();
     }
 
-    public User findById(UUID uuid) {
+    public Optional<User> findById(UUID uuid) {
         return userRepository.findById(uuid);
     }
 
@@ -29,12 +29,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User update(User user) {
-        return user;
-    }
-
     public void delete(UUID uuid) {
-        userRepository.delete(uuid);
+        userRepository.deleteById(uuid);
 
     }
 }
